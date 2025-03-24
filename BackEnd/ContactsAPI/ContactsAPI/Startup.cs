@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ContactsAPI.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,7 +28,11 @@ namespace ContactsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<ContactsAppDbContext>(options => options.UseInMemoryDatabase("ContactsDb"));
+
             services.AddControllers();
+
+            services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
             {
@@ -75,6 +81,13 @@ namespace ContactsAPI
             {
                 endpoints.MapControllers();
             });
+
+            // To ensure that the in-memory DB is created
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                var db = scope.ServiceProvider.GetRequiredService<ContactsAppDbContext>();
+                db.Database.EnsureCreated();
+            }
         }
     }
 }
