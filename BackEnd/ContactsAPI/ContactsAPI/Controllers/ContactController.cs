@@ -46,6 +46,7 @@ namespace ContactsAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Contact>> CreateContact(Contact contact)
         {
+            contact.Id = new Guid();
             _context.Contacts.Add(contact);
             await _context.SaveChangesAsync();
 
