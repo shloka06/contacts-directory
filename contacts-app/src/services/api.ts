@@ -19,19 +19,38 @@ export const getContact = async(id: string): Promise<Contact> => {
 }
 
 // Create a New Contact - Backend will generate the ID so use ContactFormData type which omits id while sending to backend
-export const createContact = async(contact: ContactFormData): Promise<Contact> => {
-    const response = await axios.post(API_URL, contact);
-    return response.data; // Return new contact data - will contain generated id
-}
+export const createContact = async (contact: ContactFormData): Promise<Contact | null> => {
+    try {
+        const response = await axios.post(API_URL, contact, {
+            headers: { "Content-Type": "application/json" },
+        });
+
+        return response.data; // Return new contact data with generated ID
+    } catch (error) {
+        console.error("Error creating contact:", error);
+
+        // Return null if an error occurs
+        return null;
+    }
+};
+
 
 // Update an Existing Contact - ID passed through URL NOT the body - so use ContactFormData type which omits id
-export const updateContact = async(id: string, contact: ContactFormData) : Promise<Contact> => {
-    if(!isValidGuid(id)) {
-        throw new Error("Invalid GUID Format");
+export const updateContact = async (id: string, contactData: ContactFormData) => {
+    try {
+        const response = await axios.put(
+            `https://localhost:44305/api/Contact/${id}`,
+            contactData,
+            {
+                headers: { "Content-Type": "application/json" },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error updating contact:", error);
+        throw error;
     }
-    const response = await axios.put(`${API_URL}/${id}`, contact);
-    return response.data;
-}
+};
 
 // Delete a Contact by its ID
 export const deleteContact = async(id: string): Promise<void> => {

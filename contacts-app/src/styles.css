@@ -1,0 +1,232 @@
+/* General Contact Book Styling */
+.contact-book {
+    position: relative;
+    width: 400px;
+    min-height: 450px;
+    background:rgb(216, 240, 255);
+    border-radius: 12px;
+    padding: 20px 20px 20px;
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+    margin: auto;
+    margin-top: 60px;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contact Book Header */
+.contact-book-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background:rgb(216, 240, 255);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.contact-book-title {
+    font-weight: bold;
+    padding-left: 8px;
+    color: rgb(0, 0, 0);
+}
+
+.add-contact-button {
+    background:rgb(0, 0, 0);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.add-contact-button:hover {
+    background-color: #1565c0;
+    transform: scale(1.05);
+}
+
+.add-contact-modal .add-contact-form {
+    max-height: 90vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 5%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    width: 400px;
+}
+
+.delete-confirmation-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 350px;
+    width: 90%;
+}
+
+.MuiModal-root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Spiral Binding */
+.spiral-binding {
+    position: absolute;
+    top: 5px;
+    left: -12px;
+    width: 12px;
+    height: 99%;
+    background: repeating-linear-gradient(
+        #666 0px,
+        #666 5px,
+        transparent 5px,
+        transparent 12px
+    );
+    border-radius: 6px;
+    z-index: 10;
+}
+
+/* Contacts Page */
+.contact-page {
+    padding: 10px;
+    background: white;
+    border-radius: 10px;
+    min-height: 500px;
+    box-shadow: inset 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Card */
+.contact-card {
+    background: white;
+    margin: 10px 0;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.contact-card:hover {
+    transform: scale(1.05);
+}
+
+/* Alphabet Tabs - Vertical Scrollable on the Right */
+.alphabet-tabs {
+    position: absolute;
+    top: 70px;
+    right: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow-y: auto;
+    max-height: 85%;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #1976d2 transparent;
+}
+
+.alphabet-tabs::-webkit-scrollbar {
+    width: 5px;
+}
+
+.alphabet-tabs::-webkit-scrollbar-thumb {
+    background: #1976d2;
+    border-radius: 4px;
+}
+
+.alphabet-tabs::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tab {
+    font-size: 12px !important;
+    padding: 4px 6px !important;
+    min-width: 30px !important;
+    border-radius: 6px !important;
+    background: #1976d2 !important;
+    color: white !important;
+    transition: background 0.2s ease-in-out;
+    text-align: center;
+}
+
+.tab:hover {
+    background: #135ba1 !important;
+}
+
+/* Contact Modal Styling */
+.contact-modal {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-detail-popup {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-width: 400px;
+    text-align: center;
+}
+
+.contact-card-detail {
+    padding: 20px;
+}
+
+/* Styles for the overlay modal */
+.edit-contact-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Styles for the modal box (form container) */
+.edit-contact-form {
+    background: white;
+    padding: 24px;
+    width: 400px;
+    max-width: 90%;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+}
+
+/* Input fields spacing */
+.edit-contact-form .MuiTextField-root {
+    margin-bottom: 16px;
+}
+
+/* Buttons container */
+.edit-contact-form .MuiBox-root {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Cancel button styling */
+.edit-contact-form .MuiButton-root:nth-child(1) {
+    background-color: #d32f2f; /* Red */
+    color: white;
+}
+
+.edit-contact-form .MuiButton-root:nth-child(1):hover {
+    background-color: #b71c1c;
+}
+
+/* Save button styling */
+.edit-contact-form .MuiButton-root:nth-child(2) {
+    background-color: #1976d2; /* Blue */
+    color: white;
+}
+
+.edit-contact-form .MuiButton-root:nth-child(2):hover {
+    background-color: #1565c0;
+}

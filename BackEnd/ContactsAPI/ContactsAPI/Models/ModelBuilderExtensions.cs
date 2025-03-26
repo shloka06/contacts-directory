@@ -118,6 +118,39 @@ namespace ContactsAPI.Models
                     Email = "meera.pillai@example.com",
                     Address = "14 Marine Drive, Kochi, Kerala",
                     Note = "Yoga teacher"
+                },
+                new Contact
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Beena",
+                    MiddleName = "Sunil",
+                    LastName = "Kulkarni",
+                    Phone = "+91 9932187655",
+                    Email = "beena.cakes@example.com",
+                    Address = "123 MG Road, Pune, Maharashtra",
+                    Note = "Home Baker"
+                },
+                new Contact
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Chahat",
+                    MiddleName = "Amar",
+                    LastName = "Chauhan",
+                    Phone = "+91 9876332102",
+                    Email = "chahat.chauhan@example.com",
+                    Address = "211 PR Road, Nagpur, Maharashtra",
+                    Note = "Artist"
+                },
+                new Contact
+                {
+                    Id = Guid.NewGuid(),
+                    FirstName = "Deepak",
+                    MiddleName = "Kumar",
+                    LastName = "Kataria",
+                    Phone = "+91 9644421311",
+                    Email = "deepak.kataria@example.com",
+                    Address = "12 Lapataganj, Delhi",
+                    Note = "Jeweller"
                 }
             );
         }

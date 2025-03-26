@@ -32,6 +32,17 @@ namespace ContactsAPI
 
             services.AddControllers();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowReactApp",
+                    builder =>
+                    {
+                        builder.WithOrigins("http://localhost:3000") // Allow frontend URL
+                               .AllowAnyMethod()  // Allow GET, POST, PUT, DELETE, etc.
+                               .AllowAnyHeader(); // Allow all headers
+                    });
+            });
+
             services.AddEndpointsApiExplorer();
 
             services.AddSwaggerGen(c =>
@@ -74,6 +85,8 @@ namespace ContactsAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("AllowReactApp");
 
             app.UseAuthorization();
 

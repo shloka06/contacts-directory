@@ -44,32 +44,55 @@ namespace ContactsAPI.Controllers
         // POST api/<controller>
         // Create a new contact - Takes in new contact; Returns success message with newly created contact, or error message
         [HttpPost]
-        public async Task<ActionResult<Contact>> CreateContact(Contact contact)
+        public async Task<ActionResult<Contact>> CreateContact([FromBody] Contact contact)
         {
-            contact.Id = new Guid();
-            _context.Contacts.Add(contact);
-            await _context.SaveChangesAsync();
+            if (contact == null)
+                return BadRequest("Invalid contact data.");
 
-            return CreatedAtAction(nameof(GetContact), new { id = contact.Id }, contact ); // Return 201 Created; URI of the newly created contact; and the created Contact object
+            contact.Id = Guid.NewGuid(); // Generate a proper unique ID
+            _context.Contacts.Add(contact);
+
+            try
+            {
+                await _context.SaveChangesAsync();
+                return CreatedAtAction(nameof(GetContact), new
+                {
+                    id = contact.Id
+                }, contact);
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Error creating contact: {ex.Message}");
+                return StatusCode(500, "An error occurred while saving the contact.");
+            }
         }
+
 
         // PUT api/<controller>/5
         // Update a contact based on Guid - Takes in Guid and contact with updated data; Returns success message with empty body, or error message
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateContact(Guid id, Contact contact)
+        public async Task<IActionResult> UpdateContact(Guid id, [FromBody] Contact updatedContact)
         {
-            if (id != contact.Id)
-                return BadRequest(); // Return 400 - ID Mismatch
+            if (updatedContact == null)
+                return BadRequest("Invalid contact data");
 
             var existingContact = await _context.Contacts.FindAsync(id);
             if (existingContact == null)
-                return NotFound();  // Return 404 - Contact doesn't exist
+                return NotFound("Contact not found");
 
-            _context.Entry(contact).State = EntityState.Modified; // Mark entity as modified
+            existingContact.FirstName = updatedContact.FirstName;
+            existingContact.MiddleName = updatedContact.MiddleName;
+            existingContact.LastName = updatedContact.LastName;
+            existingContact.Phone = updatedContact.Phone;
+            existingContact.Email = updatedContact.Email;
+            existingContact.Address = updatedContact.Address;
+            existingContact.Note = updatedContact.Note;
+
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
+
+
 
         // DELETE api/<controller>/5
         // Delete a contact based on Guid - Takes in Guid; Returns success message with empty body, or error message
